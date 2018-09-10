@@ -1,16 +1,31 @@
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
 import * as Graphql from 'graphql'
-import {user} from './fakeDB'
+import {user, department, userDepartment} from './fakeDB'
 
 const app = express();
+
+const departmentType = new Graphql.GraphQLObjectType({
+    name: "Department",
+    fields: {
+        name: {type: Graphql.GraphQLString}
+    }
+});
 
 const userType = new Graphql.GraphQLObjectType({
     name: "User",
     fields: {
         name: {type: Graphql.GraphQLString},
         username: {type: Graphql.GraphQLString},
-        isVacation: {type: Graphql.GraphQLBoolean}
+        isVacation: {type: Graphql.GraphQLBoolean},
+        department: {
+            type: Graphql.GraphQLList(departmentType),
+            resolve: (user, args, context, info) => {
+                return userDepartment
+                    .filter(item => item.userId === user.id)
+                    .map(item => department[item.departmentId]);
+            }
+        }
     }
 });
 
