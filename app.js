@@ -7,7 +7,7 @@ const app = express();
 
 const departmentType = new Graphql.GraphQLObjectType({
     name: "Department",
-    fields: {
+    fields: () =>({
         name: {type: Graphql.GraphQLString},
         user: {
             type: Graphql.GraphQLList(userType),
@@ -17,7 +17,7 @@ const departmentType = new Graphql.GraphQLObjectType({
                     .map(item => user[item.userId]);
             }
         }
-    }
+    })
 });
 
 const userType = new Graphql.GraphQLObjectType({
