@@ -8,7 +8,15 @@ const app = express();
 const departmentType = new Graphql.GraphQLObjectType({
     name: "Department",
     fields: {
-        name: {type: Graphql.GraphQLString}
+        name: {type: Graphql.GraphQLString},
+        user: {
+            type: Graphql.GraphQLList(userType),
+            resolve: (department, args, context, info) => {
+                return userDepartment
+                    .filter(item => item.departmentId === department.id)
+                    .map(item => user[item.userId]);
+            }
+        }
     }
 });
 
