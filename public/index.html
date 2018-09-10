@@ -9,7 +9,12 @@
 </head>
 <body>
 <script>
-    location.href = `/graphql`;
+    location.href = `/graphql?query={
+      allUser{
+        name,
+        username
+      }
+    }`;
 </script>
 </body>
 </html>
