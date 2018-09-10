@@ -10,9 +10,10 @@
 <body>
 <script>
     location.href = `/graphql?query={
-      allUser{
+      user(id:0){
         name,
-        username
+        username,
+        isVacation
       }
     }`;
 </script>

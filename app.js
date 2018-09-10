@@ -17,6 +17,13 @@ const userType = new Graphql.GraphQLObjectType({
 const queryType = new Graphql.GraphQLObjectType({
     name: "Query",
     fields: {
+        user: {
+            args: {
+                id: { type: Graphql.GraphQLInt }
+            },
+            type: userType,
+            resolve: (obj, args, context, info) => user[args.id]
+        },
         allUser: {
             type: new Graphql.GraphQLList(userType),
             resolve: () => user
@@ -29,6 +36,13 @@ app.use('/graphql', graphqlHTTP({
     schema: new Graphql.GraphQLSchema({
         query: queryType
     })
+}));
+
+app.use('/graphiql', graphqlHTTP({
+    schema: new Graphql.GraphQLSchema({
+        query: queryType
+    }),
+    graphiql : true
 }));
 
 app.listen(4000);
