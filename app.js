@@ -3,6 +3,7 @@ import graphqlHTTP from 'express-graphql'
 import 'graphql'
 
 const app = express();
+app.use(express.static('public'));
 app.use('/graphql', graphqlHTTP({
 }));
 app.listen(4000);
