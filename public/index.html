@@ -10,11 +10,11 @@
 <body>
 <script>
     location.href = `/graphql?query={
-      user(id:0){
+      user(id:7){
         name,
         username,
         isVacation,
-        department{
+        department(category:"개발"){
             name
         }
       }

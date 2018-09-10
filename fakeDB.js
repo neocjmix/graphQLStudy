@@ -1,7 +1,7 @@
 const department = [
-    {id : 0, name: "검색광고개발1셀"},
-    {id : 1, name: "치킨런TF"},
-    {id : 2, name: "신입온보딩TF"},
+    {id : 0, name: "검색광고개발1셀", category : "개발"},
+    {id : 1, name: "치킨런TF", category : "개발"},
+    {id : 2, name: "신입온보딩TF", category : "기타"},
 ];
 
 const userDepartment = [
@@ -20,7 +20,8 @@ const userDepartment = [
     {userId: 9, departmentId: 0},
     {userId: 10, departmentId: 0},
     {userId: 11, departmentId: 0},
-    {userId: 12, departmentId: 0}
+    {userId: 12, departmentId: 0},
+    {userId: 13, departmentId: 0}
 ];
 
 const user = [

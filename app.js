@@ -19,11 +19,15 @@ const userType = new Graphql.GraphQLObjectType({
         username: {type: Graphql.GraphQLString},
         isVacation: {type: Graphql.GraphQLBoolean},
         department: {
+            args: {
+                category: { type: Graphql.GraphQLString }
+            },
             type: Graphql.GraphQLList(departmentType),
             resolve: (user, args, context, info) => {
                 return userDepartment
                     .filter(item => item.userId === user.id)
-                    .map(item => department[item.departmentId]);
+                    .map(item => department[item.departmentId])
+                    .filter(item => args.category ? item.category === args.category : true);
             }
         }
     }
