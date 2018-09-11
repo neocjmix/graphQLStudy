@@ -15,7 +15,10 @@
         username,
         isVacation,
         department(category:"개발"){
-            name
+            name,
+            user {
+                name
+            }
         }
       }
     }`;
