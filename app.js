@@ -23,6 +23,7 @@ const departmentType = new Graphql.GraphQLObjectType({
 const userType = new Graphql.GraphQLObjectType({
     name: "User",
     fields: {
+        id: {type: Graphql.GraphQLInt},
         name: {type: Graphql.GraphQLString},
         username: {type: Graphql.GraphQLString},
         isVacation: {type: Graphql.GraphQLBoolean},
