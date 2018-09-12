@@ -17,6 +17,7 @@
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/node": "^7.0.0",
-    "@babel/preset-env": "^7.0.0"
+    "@babel/preset-env": "^7.0.0",
+    "apollo-server-express": "^2.0.6"
   }
 }
