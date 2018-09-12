@@ -42,6 +42,17 @@ const userType = new Graphql.GraphQLObjectType({
     }
 });
 
+const userInput = new Graphql.GraphQLInputObjectType({
+    name: "UserInput",
+    fields: {
+        id: {type: Graphql.GraphQLInt},
+        name: {type: Graphql.GraphQLString},
+        username: {type: Graphql.GraphQLString},
+        isVacation: {type: Graphql.GraphQLBoolean},
+        department: {type: Graphql.GraphQLInt}
+    }
+});
+
 const queryType = new Graphql.GraphQLObjectType({
     name: "Query",
     fields: {
@@ -59,16 +70,34 @@ const queryType = new Graphql.GraphQLObjectType({
     }
 });
 
+const mutationType = new Graphql.GraphQLObjectType({
+    name: "Mutation",
+    fields: {
+        updateUser : {
+            args : {
+                user : { type: userInput }
+            },
+            type: userType,
+            resolve: (obj, args, context, info) => {
+                user[args.user.id] = {...user[args.user.id], ...args.user};
+                return user[args.user.id];
+            }
+        }
+    }
+});
+
 app.use(express.static('public'));
 app.use('/graphql', graphqlHTTP({
     schema: new Graphql.GraphQLSchema({
-        query: queryType
+        query: queryType,
+        mutation : mutationType
     })
 }));
 
 app.use('/graphiql', graphqlHTTP({
     schema: new Graphql.GraphQLSchema({
-        query: queryType
+        query: queryType,
+        mutation : mutationType
     }),
     graphiql : true
 }));
