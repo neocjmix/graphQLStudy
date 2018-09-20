@@ -1,0 +1,29 @@
+type Department{
+    name : String
+    user : [User]
+}
+
+type User{
+    id : Int
+    name : String
+    username : String
+    isVacation : Boolean
+    department(category : String) : [Department]
+}
+
+input UserInput{
+    id : Int
+    name : String
+    username : String
+    isVacation : Boolean
+    department : [Int]
+}
+
+type Query{
+    user(id: Int): User
+    allUser :[User]
+}
+
+type Mutation{
+    updateUser(user : UserInput!) : User
+}
